@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | FarmConnect</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/auth.css">
+
+</head>
+
+
+<body>
+
+    <div class="auth-page">
+
+
+        <!-- =====================================
+             LEFT SIDE
+        ====================================== -->
+
+        <div class="auth-image">
+
+            <div class="image-overlay">
+
+                <div class="auth-logo">
+
+                    <span>🌾</span>
+
+                    <div>
+
+                        <h1>FarmConnect</h1>
+
+                        <p>Farmer 🤝 Customer</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-message">
+
+                    <h2>
+                        Grow Together.
+                        <br>
+                        Connect Directly.
+                    </h2>
+
+                    <p>
+                        Join FarmConnect and become part of
+                        a direct connection between farmers
+                        and customers.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             RIGHT SIDE
+        ====================================== -->
+
+        <div class="auth-container">
+
+            <div class="auth-box">
+
+
+                <!-- Mobile Logo -->
+
+                <div class="mobile-logo">
+
+                    <div class="mobile-logo-icon">
+                        🌾
+                    </div>
+
+                    <h2>FarmConnect</h2>
+
+                    <p>Farmer 🤝 Customer</p>
+
+                </div>
+
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+                    Join the FarmConnect community
+                </p>
+
+
+                <!-- =================================
+                     ACCOUNT TYPE
+                ================================== -->
+
+                <label>
+                    I want to join as
+                </label>
+
+
+                <div class="user-type">
+
+                    <button
+                        type="button"
+                        class="type-btn active"
+                        data-type="customer">
+
+                        <span>🛒</span>
+
+                        <span>Customer</span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="type-btn"
+                        data-type="farmer">
+
+                        <span>👨‍🌾</span>
+
+                        <span>Farmer</span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- =================================
+                     NAME
+                ================================== -->
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                >
+
+
+                <!-- =================================
+                     EMAIL
+                ================================== -->
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                >
+
+
+                <!-- =================================
+                     PHONE
+                ================================== -->
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter 10-digit phone number"
+                    maxlength="10"
+                >
+
+
+                <!-- =================================
+                     LOCATION
+                ================================== -->
+
+                <label for="location">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="City / Village / District"
+                >
+
+
+                <!-- =================================
+                     PASSWORD
+                ================================== -->
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Minimum 6 characters"
+                >
+
+
+                <!-- =================================
+                     CONFIRM PASSWORD
+                ================================== -->
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Re-enter your password"
+                >
+
+
+                <!-- =================================
+                     REGISTER BUTTON
+                ================================== -->
+
+                <button
+                    type="button"
+                    id="registerBtn"
+                    class="auth-btn">
+
+                    Create Account
+
+                </button>
+
+
+                <!-- =================================
+                     MESSAGE
+                ================================== -->
+
+                <p
+                    id="registerMessage"
+                    class="message">
+                </p>
+
+
+                <!-- =================================
+                     LOGIN
+                ================================== -->
+
+                <p class="register-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </p>
+
+
+                <a
+                    href="index.html"
+                    class="home-link">
+
+                    ← Back to Home
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Registration JavaScript -->
+
+    <script
+        type="module"
+        src="js/register.js">
+    </script>
+
+</body>
+
+</html>

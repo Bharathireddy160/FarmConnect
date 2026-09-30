@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Products | FarmConnect</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="css/my-products.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🌾
+        </div>
+
+        <div>
+
+            <h2>
+                FarmConnect
+            </h2>
+
+            <span>
+                Farmer 🤝 Customer
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="farmer-dashboard.html"
+           class="nav-item">
+
+            <span>📊</span>
+
+            Dashboard
+
+        </a>
+
+
+        <a href="add-product.html"
+           class="nav-item">
+
+            <span>➕</span>
+
+            Add Product
+
+        </a>
+
+
+        <a href="my-products.html"
+           class="nav-item active">
+
+            <span>🌾</span>
+
+            My Products
+
+        </a>
+
+
+        <a href="farmer-orders.html"
+           class="nav-item">
+
+            <span>📦</span>
+
+            Orders
+
+        </a>
+
+
+        <a href="profile.html"
+           class="nav-item">
+
+            <span>👤</span>
+
+            My Profile
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="connection-mini">
+            👨‍🌾 🤝 🛒
+        </div>
+
+        <p>
+            Connecting farms with families
+        </p>
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            🚪 Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================
+     MAIN CONTENT
+========================================= -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <p class="welcome-small">
+                FARM STORE
+            </p>
+
+            <h1>
+                My Products 🌾
+            </h1>
+
+        </div>
+
+
+        <a href="add-product.html"
+           class="add-product-top">
+
+            + Add Product
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================
+         FARMER CONNECTION BANNER
+    ====================================== -->
+
+    <section class="products-banner">
+
+        <div>
+
+            <span>
+                👨‍🌾 YOUR FARM → 🛒 YOUR CUSTOMERS
+            </span>
+
+            <h2>
+                Manage Your Farm Products
+            </h2>
+
+            <p>
+                View, manage and update the products
+                you offer to customers.
+            </p>
+
+        </div>
+
+
+        <div class="banner-icons">
+
+            <div>
+                👨‍🌾
+            </div>
+
+            <span>
+                🤝
+            </span>
+
+            <div>
+                🌾
+            </div>
+
+            <span>
+                →
+            </span>
+
+            <div>
+                🛒
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         STATISTICS
+    ====================================== -->
+
+    <section class="product-stats">
+
+
+        <div class="product-stat">
+
+            <div class="product-stat-icon">
+                🌾
+            </div>
+
+            <div>
+
+                <span>
+                    Total Products
+                </span>
+
+                <strong id="totalProducts">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-stat">
+
+            <div class="product-stat-icon available">
+                ✅
+            </div>
+
+            <div>
+
+                <span>
+                    Available
+                </span>
+
+                <strong id="availableProducts">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="product-stat">
+
+            <div class="product-stat-icon unavailable">
+                ⏸️
+            </div>
+
+            <div>
+
+                <span>
+                    Unavailable
+                </span>
+
+                <strong id="unavailableProducts">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         SEARCH + FILTER
+    ====================================== -->
+
+    <section class="product-controls">
+
+
+        <div class="search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search your products...">
+
+        </div>
+
+
+        <select id="categoryFilter">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="Vegetables">
+                🥕 Vegetables
+            </option>
+
+            <option value="Fruits">
+                🥭 Fruits
+            </option>
+
+            <option value="Grains">
+                🌾 Grains
+            </option>
+
+            <option value="Pulses">
+                🫘 Pulses
+            </option>
+
+            <option value="Spices">
+                🌶️ Spices
+            </option>
+
+            <option value="Dairy">
+                🥛 Dairy
+            </option>
+
+            <option value="Other">
+                🌱 Other
+            </option>
+
+        </select>
+
+    </section>
+
+
+
+    <!-- =====================================
+         PRODUCTS
+    ====================================== -->
+
+    <section>
+
+        <div class="products-heading">
+
+            <div>
+
+                <span>
+                    FARM INVENTORY
+                </span>
+
+                <h2>
+                    Your Products
+                </h2>
+
+            </div>
+
+            <p id="resultText">
+                Loading products...
+            </p>
+
+        </div>
+
+
+        <div
+            id="productsGrid"
+            class="products-grid">
+
+
+            <!-- Loading -->
+
+            <div class="loading-state">
+
+                <div class="loading-icon">
+                    🌱
+                </div>
+
+                <h3>
+                    Loading your products...
+                </h3>
+
+                <p>
+                    Please wait while we connect
+                    to your farm store.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         EMPTY STATE
+    ====================================== -->
+
+    <div
+        id="emptyState"
+        class="empty-products"
+        style="display:none;">
+
+        <div class="empty-product-icon">
+            🌱
+        </div>
+
+        <h2>
+            No Products Found
+        </h2>
+
+        <p>
+            You haven't added any products yet.
+        </p>
+
+        <a href="add-product.html">
+            + Add Your First Product
+        </a>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            🌾 FarmConnect
+        </strong>
+
+        <span>
+            Connecting Farmer Hands 🤝 Customer Hands
+        </span>
+
+        <span>
+            © 2026 FarmConnect
+        </span>
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- =====================================
+     DELETE MODAL
+===================================== -->
+
+<div
+    id="deleteModal"
+    class="modal-overlay">
+
+
+    <div class="delete-modal">
+
+        <div class="delete-icon">
+            🗑️
+        </div>
+
+        <h2>
+            Delete Product?
+        </h2>
+
+        <p>
+            Are you sure you want to delete
+            this product?
+        </p>
+
+        <div class="delete-actions">
+
+            <button
+                id="cancelDelete"
+                class="cancel-delete">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                id="confirmDelete"
+                class="confirm-delete">
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script
+    type="module"
+    src="js/my-products.js">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,602 @@
+/* ==========================================
+   ADD PRODUCT PAGE
+========================================== */
+
+.back-btn {
+
+    text-decoration: none;
+
+    color: #32753a;
+
+    background: #eaf5e5;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+/* ==========================================
+   PRODUCT BANNER
+========================================== */
+
+.product-banner {
+
+    background:
+        linear-gradient(
+            110deg,
+            #286631,
+            #4f8b3f
+        );
+
+    border-radius: 18px;
+
+    padding: 30px 35px;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+
+.product-banner > div:first-child {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.product-banner span {
+
+    color: #d9ed89;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    font-weight: 700;
+}
+
+
+.product-banner h2 {
+
+    font-size: 25px;
+
+    line-height: 1.25;
+
+    margin: 8px 0;
+}
+
+
+.product-banner p {
+
+    color: #dfebdc;
+
+    font-size: 11px;
+}
+
+
+.banner-connection {
+
+    font-size: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: rgba(255,255,255,0.12);
+
+    padding: 25px 30px;
+
+    border-radius: 18px;
+}
+
+
+.banner-connection span {
+
+    font-size: 25px;
+
+    letter-spacing: 0;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.form-section {
+
+    max-width: 1000px;
+
+    margin: auto;
+}
+
+
+.form-card {
+
+    background: white;
+
+    border: 1px solid #e1e8de;
+
+    border-radius: 15px;
+
+    padding: 28px;
+
+    margin-bottom: 20px;
+}
+
+
+.card-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid #edf1eb;
+
+    margin-bottom: 22px;
+}
+
+
+.card-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    background: #eaf5e5;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+
+.card-title h2 {
+
+    font-size: 17px;
+
+    color: #315934;
+}
+
+
+.card-title p {
+
+    font-size: 10px;
+
+    color: #8a9388;
+
+    margin-top: 3px;
+}
+
+
+/* ==========================================
+   IMAGE UPLOAD
+========================================== */
+
+.image-upload {
+
+    min-height: 220px;
+
+    border: 2px dashed #bdd4b7;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    background: #fbfdf9;
+
+    transition: 0.3s;
+
+    overflow: hidden;
+
+    padding: 20px;
+}
+
+
+.image-upload:hover {
+
+    background: #f1f8ee;
+
+    border-color: #57934f;
+}
+
+
+.upload-icon {
+
+    width: 60px;
+
+    height: 60px;
+
+    background: #eaf5e5;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+.image-upload strong {
+
+    color: #426644;
+
+    font-size: 12px;
+}
+
+
+.image-upload > span {
+
+    color: #9aa39a;
+
+    font-size: 9px;
+
+    margin-top: 5px;
+}
+
+
+#imagePreview {
+
+    display: none;
+
+    max-width: 100%;
+
+    max-height: 190px;
+
+    object-fit: contain;
+
+    border-radius: 10px;
+}
+
+
+/* ==========================================
+   FORM GRID
+========================================== */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.form-group.full {
+
+    grid-column: 1 / -1;
+}
+
+
+.form-group label {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: #4b5d4b;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #dce5d9;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    color: #344634;
+
+    outline: none;
+
+    background: white;
+
+    transition: 0.3s;
+}
+
+
+.form-group textarea {
+
+    resize: vertical;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #57934f;
+
+    box-shadow:
+        0 0 0 3px rgba(87,147,79,0.08);
+}
+
+
+.input-with-symbol {
+
+    position: relative;
+}
+
+
+.input-with-symbol span {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #57934f;
+
+    font-weight: 600;
+
+    font-size: 13px;
+}
+
+
+.input-with-symbol input {
+
+    padding-left: 30px;
+}
+
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.form-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin: 25px 0 10px;
+}
+
+
+.cancel-btn {
+
+    text-decoration: none;
+
+    padding: 12px 22px;
+
+    border: 1px solid #dce5d9;
+
+    color: #657165;
+
+    background: white;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.save-btn {
+
+    border: none;
+
+    padding: 13px 24px;
+
+    background: #32753a;
+
+    color: white;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.save-btn:hover {
+
+    background: #245d2d;
+
+    transform: translateY(-2px);
+}
+
+
+.save-btn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+.product-message {
+
+    min-height: 20px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+    .product-banner {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+
+    .banner-connection {
+
+        font-size: 35px;
+
+        padding: 18px 22px;
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-group.full {
+
+        grid-column: auto;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .main-content {
+
+        padding: 0 12px 30px;
+    }
+
+
+    .topbar {
+
+        padding: 15px 0;
+    }
+
+
+    .topbar h1 {
+
+        font-size: 19px;
+    }
+
+
+    .back-btn {
+
+        font-size: 9px;
+
+        padding: 8px 10px;
+    }
+
+
+    .product-banner {
+
+        padding: 25px;
+    }
+
+
+    .product-banner h2 {
+
+        font-size: 21px;
+    }
+
+
+    .form-card {
+
+        padding: 20px;
+    }
+
+
+    .form-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .cancel-btn,
+    .save-btn {
+
+        text-align: center;
+
+        width: 100%;
+    }
+
+}
