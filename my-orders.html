@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders | FarmConnect</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/customer.css">
+
+    <link rel="stylesheet"
+          href="css/my-orders.css">
+
+</head>
+
+
+<body>
+    
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🌾
+        </div>
+
+        <div>
+            <h2>FarmConnect</h2>
+
+            <span>
+                Farmer 🤝 Customer
+            </span>
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="customer-dashboard.html"
+           class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="browse-products.html"
+           class="nav-item">
+            🛒 Browse Products
+        </a>
+
+        <a href="cart.html"
+           class="nav-item">
+            🛍️ My Cart
+
+            <span id="cartCount"
+                  class="cart-count">
+                0
+            </span>
+        </a>
+
+        <a href="my-orders.html"
+           class="nav-item active">
+            📦 My Orders
+        </a>
+
+        <a href="profile.html"
+           class="nav-item">
+            👤 My Profile
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="connection-mini">
+            👨‍🌾 🤝 🛒
+        </div>
+
+        <p>
+            Fresh products directly from farmers
+        </p>
+
+        <button id="logoutBtn"
+                class="logout-btn">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <p class="welcome-small">
+                CUSTOMER PORTAL
+            </p>
+
+            <h1>
+                My Orders 📦
+            </h1>
+
+        </div>
+
+
+        <div class="user-info">
+
+            <div id="userInitial"
+                 class="user-avatar">
+                C
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="orders-header">
+
+        <div>
+
+            <span>
+                YOUR PURCHASES
+            </span>
+
+            <h2>
+                Track Your Orders
+            </h2>
+
+            <p>
+                View your purchases and check the current
+                status of your orders.
+            </p>
+
+        </div>
+
+        <a href="browse-products.html"
+           class="browse-btn">
+            🛒 Continue Shopping
+        </a>
+
+    </section>
+
+
+    <!-- ORDER FILTERS -->
+
+    <section class="order-filters">
+
+        <button class="filter-btn active"
+                data-status="all">
+            All Orders
+        </button>
+
+        <button class="filter-btn"
+                data-status="pending">
+            Pending
+        </button>
+
+        <button class="filter-btn"
+                data-status="confirmed">
+            Confirmed
+        </button>
+
+        <button class="filter-btn"
+                data-status="delivered">
+            Delivered
+        </button>
+
+        <button class="filter-btn"
+                data-status="cancelled">
+            Cancelled
+        </button>
+
+    </section>
+
+
+    <!-- ORDERS -->
+
+    <section id="ordersContainer"
+             class="orders-container">
+
+        <div class="loading">
+            🌱 Loading your orders...
+        </div>
+
+    </section>
+
+
+    <!-- EMPTY STATE -->
+
+    <section id="emptyOrders"
+             class="empty-orders"
+             style="display: none;">
+
+        <div class="empty-icon">
+            📦
+        </div>
+
+        <h2>
+            No Orders Found
+        </h2>
+
+        <p>
+            You haven't placed any orders yet.
+            Start shopping directly from farmers.
+        </p>
+
+        <a href="browse-products.html"
+           class="browse-btn">
+            🛒 Browse Products
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            🌾 FarmConnect
+        </strong>
+
+        <span>
+            Connecting Farmer Hands 🤝 Customer Hands
+        </span>
+
+        <span>
+            © 2026 FarmConnect
+        </span>
+
+    </footer>
+
+</main>
+
+
+<script type="module"
+        src="js/my-orders.js">
+</script>
+
+</body>
+
+</html>

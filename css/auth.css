@@ -481,3 +481,65 @@ input:focus {
 .message {
     min-height: 20px;
 }
+/* ==========================================
+   PASSWORD FIELD
+========================================== */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+}
+
+
+/* Show / Hide Password Button */
+
+.show-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    opacity: 0.65;
+
+    transition: 0.2s;
+}
+
+
+.show-password:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08);
+}
+
+
+.show-password:focus {
+    outline: none;
+}
+
+
+/* Make sure password input doesn't
+   get affected by button */
+
+.password-wrapper input:focus {
+    outline: none;
+}
+

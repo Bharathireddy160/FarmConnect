@@ -1,17 +1,12 @@
-// ==========================================
-// FarmConnect Authentication
-// ==========================================
 
 import {
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-
 import {
     doc,
     getDoc
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
 
 import {
     auth,
@@ -19,91 +14,52 @@ import {
 } from "./firebase.js";
 
 
-// ==========================================
-// Elements
-// ==========================================
+// ===============================
+// ELEMENTS
+// ===============================
 
-const loginBtn =
-    document.getElementById("loginBtn");
-
-const emailInput =
-    document.getElementById("email");
-
-const passwordInput =
-    document.getElementById("password");
-
-const message =
-    document.getElementById("message");
-
-const typeButtons =
-    document.querySelectorAll(".type-btn");
+const loginBtn = document.getElementById("loginBtn");
+const message = document.getElementById("message");
 
 
-// Default user type
+// ===============================
+// LOGIN
+// ===============================
 
-let selectedUserType = "customer";
+loginBtn.addEventListener("click", async () => {
 
-
-// ==========================================
-// Select Farmer / Customer
-// ==========================================
-
-typeButtons.forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        typeButtons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const accountType = document.querySelector(
+        'input[name="accountType"]:checked'
+    )?.value;
 
 
-        this.classList.add("active");
-
-
-        selectedUserType =
-            this.dataset.type;
-
-    });
-
-});
-
-
-// ==========================================
-// Login
-// ==========================================
-
-loginBtn.addEventListener("click", async function () {
-
-    const email =
-        emailInput.value.trim();
-
-    const password =
-        passwordInput.value;
-
-
-    // Validation
+    // -------------------------------
+    // VALIDATION
+    // -------------------------------
 
     if (!email || !password) {
+        showMessage("Please enter email and password.", "error");
+        return;
+    }
 
-        showMessage(
-            "Please enter email and password.",
-            "error"
-        );
-
+    if (!accountType) {
+        showMessage("Please select Customer or Farmer.", "error");
         return;
     }
 
 
+    // Disable button
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Logging in...";
+
+
     try {
 
-        loginBtn.disabled = true;
-
-        loginBtn.textContent = "Logging in...";
-
-
-        // Firebase login
+        // -------------------------------
+        // FIREBASE LOGIN
+        // -------------------------------
 
         const userCredential =
             await signInWithEmailAndPassword(
@@ -112,25 +68,28 @@ loginBtn.addEventListener("click", async function () {
                 password
             );
 
-
-        const user =
-            userCredential.user;
+        const user = userCredential.user;
 
 
-        // Get user information
+        // -------------------------------
+        // GET USER DATA FROM FIRESTORE
+        // -------------------------------
 
-        const userRef =
-            doc(db, "users", user.uid);
+        const userRef = doc(
+            db,
+            "users",
+            user.uid
+        );
+
+        const userSnap = await getDoc(userRef);
 
 
-        const userSnapshot =
-            await getDoc(userRef);
+        if (!userSnap.exists()) {
 
-
-        if (!userSnapshot.exists()) {
+            await auth.signOut();
 
             showMessage(
-                "User profile not found.",
+                "User profile not found. Please register again.",
                 "error"
             );
 
@@ -138,19 +97,39 @@ loginBtn.addEventListener("click", async function () {
         }
 
 
-        const userData =
-            userSnapshot.data();
+        const userData = userSnap.data();
 
 
-        // Check selected role
+        // -------------------------------
+        // GET USER TYPE
+        // -------------------------------
 
-        if (
-            userData.role !==
-            selectedUserType
-        ) {
+        const registeredType =
+            String(userData.userType || "")
+                .trim()
+                .toLowerCase();
+
+        const selectedType =
+            String(accountType)
+                .trim()
+                .toLowerCase();
+
+
+        console.log("Selected account type:", selectedType);
+        console.log("Registered account type:", registeredType);
+        console.log("User data:", userData);
+
+
+        // -------------------------------
+        // CHECK ACCOUNT TYPE
+        // -------------------------------
+
+        if (registeredType !== selectedType) {
+
+            await auth.signOut();
 
             showMessage(
-                `This account is registered as ${userData.role}. Please select the correct option.`,
+                `This account is registered as ${registeredType || "another account"}. Please select the correct account type.`,
                 "error"
             );
 
@@ -158,70 +137,92 @@ loginBtn.addEventListener("click", async function () {
         }
 
 
-        showMessage(
-            "Login successful! Redirecting...",
-            "success"
+        // -------------------------------
+        // SAVE USER TYPE LOCALLY
+        // -------------------------------
+
+        localStorage.setItem(
+            "farmConnectUserType",
+            registeredType
         );
 
 
-        // Redirect
+        localStorage.setItem(
+            "farmConnectUserName",
+            userData.name ||
+            userData.fullName ||
+            userData.username ||
+            user.email?.split("@")[0] ||
+            "User"
+        );
 
-        setTimeout(() => {
 
-            if (userData.role === "farmer") {
+        // -------------------------------
+        // REDIRECT
+        // -------------------------------
 
-                window.location.href =
-                    "farmer-dashboard.html";
+        if (registeredType === "farmer") {
 
-            } else {
+            console.log("Redirecting to Farmer Dashboard...");
 
-                window.location.href =
-                    "customer-dashboard.html";
+            window.location.href =
+                "farmer-dashboard.html";
 
-            }
+        } else if (registeredType === "customer") {
 
-        }, 1000);
+            console.log("Redirecting to Customer Dashboard...");
+
+            window.location.href =
+                "customer-dashboard.html";
+
+        } else {
+
+            await auth.signOut();
+
+            showMessage(
+                "Invalid account type. Please contact support.",
+                "error"
+            );
+        }
 
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Login Error:", error);
 
 
         let errorMessage =
-            "Login failed. Please try again.";
+            "Something went wrong. Please try again.";
 
 
-        if (
-            error.code ===
-            "auth/invalid-credential"
-        ) {
-
+        if (error.code === "auth/invalid-credential") {
             errorMessage =
-                "Incorrect email or password.";
-
+                "Invalid email or password.";
         }
 
-
-        if (
-            error.code ===
-            "auth/user-not-found"
-        ) {
-
+        else if (error.code === "auth/user-not-found") {
             errorMessage =
                 "No account found with this email.";
-
         }
 
-
-        if (
-            error.code ===
-            "auth/wrong-password"
-        ) {
-
+        else if (error.code === "auth/wrong-password") {
             errorMessage =
                 "Incorrect password.";
+        }
 
+        else if (error.code === "auth/invalid-email") {
+            errorMessage =
+                "Please enter a valid email address.";
+        }
+
+        else if (error.code === "auth/too-many-requests") {
+            errorMessage =
+                "Too many attempts. Please try again later.";
+        }
+
+        else if (error.code === "permission-denied") {
+            errorMessage =
+                "Permission denied while reading your profile.";
         }
 
 
@@ -233,31 +234,58 @@ loginBtn.addEventListener("click", async function () {
     } finally {
 
         loginBtn.disabled = false;
-
         loginBtn.textContent = "Login";
-
     }
 
 });
 
 
-// ==========================================
-// Show Message
-// ==========================================
+// ===============================
+// MESSAGE
+// ===============================
 
 function showMessage(text, type) {
 
+    if (!message) return;
+
     message.textContent = text;
 
-
-    if (type === "success") {
-
-        message.style.color = "#2f8a3a";
-
-    } else {
-
-        message.style.color = "#d43d3d";
-
-    }
-
+    message.className =
+        `message ${type}`;
 }
+
+
+// ===============================
+// SHOW / HIDE PASSWORD
+// ===============================
+
+const togglePassword =
+    document.getElementById("togglePassword");
+
+const passwordInput =
+    document.getElementById("password");
+
+
+if (togglePassword && passwordInput) {
+
+    togglePassword.addEventListener(
+        "click",
+        () => {
+
+            if (passwordInput.type === "password") {
+
+                passwordInput.type = "text";
+
+                togglePassword.textContent = "🙈";
+
+            } else {
+
+                passwordInput.type = "password";
+
+                togglePassword.textContent = "👁️";
+            }
+
+        }
+    );
+}
+

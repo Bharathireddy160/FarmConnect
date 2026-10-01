@@ -1,0 +1,402 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FarmConnect - Browse Products</title>
+
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/browse-products.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     SIDEBAR
+========================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🌾
+        </div>
+
+        <div>
+
+            <h2>
+                FarmConnect
+            </h2>
+
+            <span>
+                Farmer 🤝 Customer
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a
+            href="customer-dashboard.html"
+            class="nav-item">
+
+            🏠
+            Dashboard
+
+        </a>
+
+
+        <a
+            href="browse-products.html"
+            class="nav-item active">
+
+            🛒
+            Browse Products
+
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="nav-item">
+
+            🛍️
+            My Cart
+
+            <span
+                id="cartCount"
+                class="cart-count">
+
+                0
+
+            </span>
+
+        </a>
+
+
+        <a
+            href="my-orders.html"
+            class="nav-item">
+
+            📦
+            My Orders
+
+        </a>
+
+
+        <a
+            href="profile.html"
+            class="nav-item">
+
+            👤
+            My Profile
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="connection-mini">
+            👨‍🌾 🤝 🛒
+        </div>
+
+        <p>
+            Fresh products directly from farmers
+        </p>
+
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            🚪 Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ==========================================
+     MAIN CONTENT
+========================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <p class="small-title">
+                FARMCONNECT MARKET
+            </p>
+
+            <h1>
+                Fresh Products 🌱
+            </h1>
+
+        </div>
+
+
+        <div
+            id="userInitial"
+            class="user-avatar">
+
+            C
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ======================================
+         HERO
+    ======================================= -->
+
+    <section class="market-hero">
+
+        <div class="hero-text">
+
+            <span>
+                🌾 DIRECT FROM FARMERS
+            </span>
+
+            <h2>
+                Fresh from Farmer Hands
+                <br>
+                to Your Hands 🤝
+            </h2>
+
+            <p>
+                Discover fresh farm products from
+                local farmers and support direct
+                farmer-to-customer connections.
+            </p>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            👨‍🌾
+
+            <strong>
+                🤝
+            </strong>
+
+            🛒
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         SEARCH AND FILTER
+    ======================================= -->
+
+    <section class="filter-section">
+
+
+        <div class="search-box">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search vegetables, fruits, grains...">
+
+        </div>
+
+
+        <select id="categoryFilter">
+
+            <option value="all">
+                All Categories
+            </option>
+
+        </select>
+
+
+        <select id="sortFilter">
+
+            <option value="default">
+                Sort Products
+            </option>
+
+            <option value="low">
+                Price: Low to High
+            </option>
+
+            <option value="high">
+                Price: High to Low
+            </option>
+
+            <option value="name">
+                Name: A to Z
+            </option>
+
+        </select>
+
+    </section>
+
+
+
+    <!-- ======================================
+         PRODUCT INFORMATION
+    ======================================= -->
+
+    <section class="products-header">
+
+        <div>
+
+            <span>
+                FARM FRESH
+            </span>
+
+            <h2>
+                Available Products
+            </h2>
+
+        </div>
+
+
+        <p>
+
+            Showing
+            <strong id="resultCount">0</strong>
+            products
+
+        </p>
+
+    </section>
+
+
+
+    <!-- ======================================
+         PRODUCT GRID
+    ======================================= -->
+
+    <section
+        id="productGrid"
+        class="product-grid">
+
+        <div class="loading">
+
+            🌱 Loading fresh products...
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================
+         CONNECTION BANNER
+    ======================================= -->
+
+    <section class="connection-banner">
+
+        <div class="connection-icon">
+
+            👨‍🌾 🤝 🛒
+
+        </div>
+
+
+        <div>
+
+            <h2>
+                Every Purchase Supports a Farmer
+            </h2>
+
+            <p>
+                Buy directly from farmers and
+                help create a stronger farming community.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            🌾 FarmConnect
+        </strong>
+
+        <span>
+            Connecting Farmer Hands 🤝 Customer Hands
+        </span>
+
+        <span>
+            © 2026 FarmConnect
+        </span>
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script
+    type="module"
+    src="js/browse-products.js">
+</script>
+
+
+</body>
+
+</html>
+```

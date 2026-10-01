@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Dashboard | FarmConnect</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/customer.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- BRAND -->
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🌾
+        </div>
+
+        <div>
+
+            <h2>
+                FarmConnect
+            </h2>
+
+            <span>
+                Farmer 🤝 Customer
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+
+        <!-- DASHBOARD -->
+
+        <a href="customer-dashboard.html"
+           class="nav-item active">
+
+            🏠
+            Dashboard
+
+        </a>
+
+
+        <!-- BROWSE PRODUCTS -->
+
+        <a href="browse-products.html"
+           class="nav-item">
+
+            🛒
+            Browse Products
+
+        </a>
+
+
+        <!-- CART -->
+
+        <a href="cart.html"
+           class="nav-item">
+
+            🛍️
+            My Cart
+
+            <span id="cartCount"
+                  class="cart-count">
+
+                0
+
+            </span>
+
+        </a>
+
+
+        <!-- MY ORDERS -->
+
+        <a href="my-orders.html"
+           class="nav-item">
+
+            📦
+            My Orders
+
+        </a>
+
+
+        <!-- PROFILE -->
+
+        <a href="profile.html"
+           class="nav-item">
+
+            👤
+            My Profile
+
+        </a>
+
+    </nav>
+
+
+    <!-- SIDEBAR BOTTOM -->
+
+    <div class="sidebar-bottom">
+
+
+        <div class="connection-mini">
+
+            👨‍🌾 🤝 🛒
+
+        </div>
+
+
+        <p>
+            Fresh products directly from farmers
+        </p>
+
+
+        <button id="logoutBtn"
+                class="logout-btn">
+
+            🚪 Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+     ===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+         ================================================= -->
+
+    <header class="topbar">
+
+
+        <div>
+
+            <p class="welcome-small">
+                CUSTOMER PORTAL
+            </p>
+
+
+            <h1>
+
+                Welcome,
+
+                <span id="customerName">
+                    Customer
+                </span>
+
+                👋
+
+            </h1>
+
+        </div>
+
+
+        <!-- USER AVATAR -->
+
+        <div class="user-info">
+
+            <div id="userInitial"
+                 class="user-avatar">
+
+                C
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         HERO SECTION
+         ================================================= -->
+
+    <section class="customer-hero">
+
+
+        <div class="hero-content">
+
+
+            <span class="hero-label">
+
+                🌱 DIRECT FROM FARMERS
+
+            </span>
+
+
+            <h2>
+
+                Fresh from Farmer Hands
+
+                <br>
+
+                to Your Hands 🤝
+
+            </h2>
+
+
+            <p>
+
+                Buy fresh and quality farm products
+                directly from local farmers.
+
+            </p>
+
+
+            <a href="browse-products.html"
+               class="browse-btn">
+
+                🛒 Browse Fresh Products
+
+            </a>
+
+        </div>
+
+
+
+        <!-- FARMER-CUSTOMER CONNECTION -->
+
+        <div class="hero-image">
+
+            👨‍🌾
+
+            <span>
+                🤝
+            </span>
+
+            🛒
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         STATISTICS
+         ================================================= -->
+
+    <section class="stats">
+
+
+        <!-- AVAILABLE PRODUCTS -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+                🌾
+            </div>
+
+
+            <div>
+
+                <span>
+                    Available Products
+                </span>
+
+
+                <h3 id="productCount">
+                    0
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CATEGORIES -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+                🥕
+            </div>
+
+
+            <div>
+
+                <span>
+                    Categories
+                </span>
+
+
+                <h3 id="categoryCount">
+                    0
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CART -->
+
+        <div class="stat-card">
+
+
+            <div class="stat-icon">
+                🛍️
+            </div>
+
+
+            <div>
+
+                <span>
+                    Cart Items
+                </span>
+
+
+                <h3 id="cartItems">
+                    0
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RECENT PRODUCTS
+         ================================================= -->
+
+    <section class="products-section">
+
+
+        <div class="section-heading">
+
+
+            <div>
+
+                <span>
+                    FRESH FROM FARM
+                </span>
+
+
+                <h2>
+                    Recently Added Products
+                </h2>
+
+            </div>
+
+
+            <a href="browse-products.html">
+
+                View All →
+
+            </a>
+
+        </div>
+
+
+
+        <!-- PRODUCT GRID -->
+
+        <div id="productGrid"
+             class="product-grid">
+
+
+            <div class="loading">
+
+                🌱 Loading fresh products...
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CONNECTION SECTION
+         ================================================= -->
+
+    <section class="connection-section">
+
+
+        <div class="connection-icon">
+
+            👨‍🌾 🤝 🛒
+
+        </div>
+
+
+        <div>
+
+            <h2>
+
+                Supporting Farmers,
+                Serving Customers
+
+            </h2>
+
+
+            <p>
+
+                FarmConnect creates a direct connection
+                between farmers and customers.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOTER
+         ================================================= -->
+
+    <footer>
+
+
+        <strong>
+
+            🌾 FarmConnect
+
+        </strong>
+
+
+        <span>
+
+            Connecting Farmer Hands 🤝 Customer Hands
+
+        </span>
+
+
+        <span>
+
+            © 2026 FarmConnect
+
+        </span>
+
+    </footer>
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script type="module"
+        src="js/customer-dashboard.js">
+</script>
+
+
+</body>
+
+</html>
+

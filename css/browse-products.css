@@ -1,0 +1,665 @@
+
+/* ==========================================
+   FARMCONNECT - BROWSE PRODUCTS
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f5f8f3;
+    color: #354735;
+}
+
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e1e8de;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px 30px;
+}
+
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    background: #e8f3df;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+
+.brand h2 {
+    color: #326337;
+    font-size: 17px;
+}
+
+
+.brand span {
+    color: #899489;
+    font-size: 8px;
+}
+
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 9px;
+    color: #697469;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+
+.nav-item:hover,
+.nav-item.active {
+    background: #eaf5e5;
+    color: #32753a;
+}
+
+
+.cart-count {
+    margin-left: auto;
+    min-width: 18px;
+    height: 18px;
+    background: #32753a;
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7px;
+}
+
+
+.sidebar-bottom {
+    margin-top: auto;
+    text-align: center;
+}
+
+
+.connection-mini {
+    font-size: 22px;
+}
+
+
+.sidebar-bottom p {
+    color: #899389;
+    font-size: 8px;
+    margin: 8px 0 15px;
+}
+
+
+.logout-btn {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dfe7dc;
+    background: white;
+    color: #697469;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+
+.logout-btn:hover {
+    background: #f0f6ed;
+}
+
+
+/* ==========================================
+   MAIN
+========================================== */
+
+.main-content {
+    margin-left: 240px;
+    min-height: 100vh;
+    padding: 28px 35px;
+}
+
+
+/* ==========================================
+   TOP BAR
+========================================== */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+.small-title {
+    color: #7f927e;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+
+.topbar h1 {
+    color: #314d34;
+    font-size: 23px;
+    margin-top: 5px;
+}
+
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    background: #32753a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   HERO
+========================================== */
+
+.market-hero {
+    min-height: 240px;
+    padding: 35px 40px;
+    border-radius: 20px;
+    background: linear-gradient(
+        110deg,
+        #286631,
+        #6d9b56
+    );
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.hero-text span {
+    color: #e4f49d;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+
+.hero-text h2 {
+    font-size: 27px;
+    line-height: 1.35;
+    margin: 10px 0;
+}
+
+
+.hero-text p {
+    max-width: 550px;
+    color: #dcebd9;
+    font-size: 10px;
+}
+
+
+.hero-visual {
+    font-size: 65px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.hero-visual strong {
+    font-size: 28px;
+}
+
+
+/* ==========================================
+   FILTER
+========================================== */
+
+.filter-section {
+    display: grid;
+    grid-template-columns: 1fr 190px 190px;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+
+.search-box {
+    background: white;
+    border: 1px solid #dfe7dc;
+    border-radius: 9px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 10px;
+    color: #435343;
+}
+
+
+.search-box input::placeholder {
+    color: #a1aaa0;
+}
+
+
+.filter-section select {
+    background: white;
+    border: 1px solid #dfe7dc;
+    border-radius: 9px;
+    padding: 12px;
+    outline: none;
+    font-family: inherit;
+    color: #596459;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   PRODUCT HEADER
+========================================== */
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 15px;
+}
+
+
+.products-header span {
+    color: #8a9987;
+    font-size: 8px;
+    letter-spacing: 1.3px;
+    font-weight: 600;
+}
+
+
+.products-header h2 {
+    color: #354e38;
+    font-size: 18px;
+    margin-top: 3px;
+}
+
+
+.products-header p {
+    color: #929b91;
+    font-size: 9px;
+}
+
+
+.products-header strong {
+    color: #32753a;
+}
+
+
+/* ==========================================
+   PRODUCT GRID
+========================================== */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+
+/* ==========================================
+   PRODUCT CARD
+========================================== */
+
+.product-card {
+    background: white;
+    border: 1px solid #e1e8de;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(40, 90, 45, 0.10);
+}
+
+
+.product-image {
+    height: 175px;
+    background: #edf5e9;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.product-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+
+
+.category-tag {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: white;
+    color: #32753a;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 7px;
+    font-weight: 600;
+}
+
+
+.product-info {
+    padding: 16px;
+}
+
+
+.product-info h3 {
+    color: #354b37;
+    font-size: 14px;
+}
+
+
+.farmer-name {
+    color: #718070;
+    font-size: 8px;
+    margin-top: 5px;
+}
+
+
+.location {
+    color: #929b91;
+    font-size: 8px;
+    margin-top: 5px;
+}
+
+
+.product-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+
+
+.price strong {
+    color: #32753a;
+    font-size: 16px;
+}
+
+
+.price span {
+    color: #929a91;
+    font-size: 8px;
+}
+
+
+.view-btn {
+    border: none;
+    background: #32753a;
+    color: white;
+    padding: 8px 13px;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 8px;
+    cursor: pointer;
+}
+
+
+.view-btn:hover {
+    background: #245b2b;
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading {
+    grid-column: 1 / -1;
+    background: white;
+    border-radius: 13px;
+    padding: 60px;
+    text-align: center;
+    color: #879287;
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   EMPTY
+========================================== */
+
+.empty-state {
+    grid-column: 1 / -1;
+    background: white;
+    border-radius: 13px;
+    padding: 60px;
+    text-align: center;
+}
+
+
+.empty-state .icon {
+    font-size: 45px;
+}
+
+
+.empty-state h3 {
+    color: #4d5e4e;
+    margin: 10px 0 5px;
+    font-size: 15px;
+}
+
+
+.empty-state p {
+    color: #929a91;
+    font-size: 9px;
+}
+
+
+/* ==========================================
+   CONNECTION
+========================================== */
+
+.connection-banner {
+    margin-top: 30px;
+    padding: 25px;
+    background: #eaf4e6;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+.connection-icon {
+    font-size: 30px;
+}
+
+
+.connection-banner h2 {
+    color: #315934;
+    font-size: 15px;
+}
+
+
+.connection-banner p {
+    color: #7c877c;
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid #e0e7dd;
+    display: flex;
+    justify-content: space-between;
+    color: #9aa39a;
+    font-size: 8px;
+}
+
+
+footer strong {
+    color: #477048;
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-section {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .search-box {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 20px 15px;
+    }
+
+    .market-hero {
+        padding: 25px;
+    }
+
+    .hero-text h2 {
+        font-size: 21px;
+    }
+
+    .hero-visual {
+        display: none;
+    }
+
+    .filter-section {
+        grid-template-columns: 1fr;
+    }
+
+    .search-box {
+        grid-column: auto;
+        min-height: 45px;
+    }
+
+    .products-header {
+        align-items: start;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+}

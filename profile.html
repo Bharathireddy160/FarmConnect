@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | FarmConnect</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/customer.css">
+
+    <link rel="stylesheet"
+          href="css/profile.css">
+
+</head>
+
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🌾
+        </div>
+
+        <div>
+
+            <h2>FarmConnect</h2>
+
+            <span>
+                Farmer 🤝 Customer
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="customer-dashboard.html"
+           class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="browse-products.html"
+           class="nav-item">
+            🛒 Browse Products
+        </a>
+
+        <a href="cart.html"
+           class="nav-item">
+            🛍️ My Cart
+
+            <span id="cartCount"
+                  class="cart-count">
+                0
+            </span>
+        </a>
+
+        <a href="my-orders.html"
+           class="nav-item">
+            📦 My Orders
+        </a>
+
+        <a href="profile.html"
+           class="nav-item active">
+            👤 My Profile
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="connection-mini">
+            👨‍🌾 🤝 🛒
+        </div>
+
+        <p>
+            Fresh products directly from farmers
+        </p>
+
+        <button id="logoutBtn"
+                class="logout-btn">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <p class="welcome-small">
+                CUSTOMER PORTAL
+            </p>
+
+            <h1>
+                My Profile 👤
+            </h1>
+
+        </div>
+
+
+        <div class="user-info">
+
+            <div id="userInitial"
+                 class="user-avatar">
+                C
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- PROFILE CONTENT -->
+
+    <section class="profile-layout">
+
+
+        <!-- PROFILE SUMMARY -->
+
+        <div class="profile-card profile-summary">
+
+            <div class="profile-avatar"
+                 id="profileAvatar">
+                C
+            </div>
+
+            <h2 id="profileName">
+                Customer
+            </h2>
+
+            <p id="profileEmail">
+                Loading...
+            </p>
+
+            <span class="customer-badge">
+                🛒 Customer
+            </span>
+
+
+            <div class="profile-progress">
+
+                <div class="progress-heading">
+
+                    <span>
+                        Profile Completion
+                    </span>
+
+                    <strong id="profilePercentage">
+                        0%
+                    </strong>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div id="progressFill"
+                         class="progress-fill">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE FORM -->
+
+        <div class="profile-card">
+
+            <div class="profile-title">
+
+                <span>
+                    ACCOUNT INFORMATION
+                </span>
+
+                <h2>
+                    Personal Details
+                </h2>
+
+                <p>
+                    Update your information so farmers
+                    can contact you when needed.
+                </p>
+
+            </div>
+
+
+            <form id="profileForm">
+
+
+                <div class="form-row">
+
+                    <div class="profile-input">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+
+                    <div class="profile-input">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Your email"
+                            readonly>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="profile-input">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter your phone number"
+                            maxlength="10">
+
+                    </div>
+
+
+                    <div class="profile-input">
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="Enter your location">
+
+                    </div>
+
+                </div>
+
+
+                <div id="profileMessage"
+                     class="profile-message">
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="saveProfileBtn"
+                    class="save-profile-btn">
+
+                    💾 Save Profile
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONNECTION -->
+
+    <section class="connection-section">
+
+        <div class="connection-icon">
+            👨‍🌾 🤝 🛒
+        </div>
+
+        <div>
+
+            <h2>
+                Your Connection with Farmers
+            </h2>
+
+            <p>
+                Keep your profile information updated
+                to make direct farmer-customer communication
+                easier.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            🌾 FarmConnect
+        </strong>
+
+        <span>
+            Connecting Farmer Hands 🤝 Customer Hands
+        </span>
+
+        <span>
+            © 2026 FarmConnect
+        </span>
+
+    </footer>
+
+</main>
+
+
+<script type="module"
+        src="js/profile.js">
+</script>
+
+</body>
+
+</html>
+

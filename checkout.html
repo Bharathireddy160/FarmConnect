@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FarmConnect - Checkout</title>
+
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/checkout.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     SIDEBAR
+========================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🌾
+        </div>
+
+        <div>
+
+            <h2>
+                FarmConnect
+            </h2>
+
+            <span>
+                Farmer 🤝 Customer
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a
+            href="customer-dashboard.html"
+            class="nav-item">
+
+            🏠 Dashboard
+
+        </a>
+
+
+        <a
+            href="browse-products.html"
+            class="nav-item">
+
+            🛒 Browse Products
+
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="nav-item">
+
+            🛍️ My Cart
+
+            <span
+                id="cartCount"
+                class="cart-count">
+
+                0
+
+            </span>
+
+        </a>
+
+
+        <a
+            href="my-orders.html"
+            class="nav-item">
+
+            📦 My Orders
+
+        </a>
+
+
+        <a
+            href="profile.html"
+            class="nav-item">
+
+            👤 My Profile
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="connection-mini">
+            👨‍🌾 🤝 🛒
+        </div>
+
+        <p>
+            Fresh products directly from farmers
+        </p>
+
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            🚪 Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ==========================================
+     MAIN
+========================================== -->
+
+<main class="main-content">
+
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <div>
+
+            <p class="small-title">
+                FARMCONNECT MARKET
+            </p>
+
+            <h1>
+                Checkout
+            </h1>
+
+        </div>
+
+
+        <div
+            id="userInitial"
+            class="user-avatar">
+
+            C
+
+        </div>
+
+    </header>
+
+
+
+    <!-- BACK -->
+
+    <a
+        href="cart.html"
+        class="back-button">
+
+        ← Back to Cart
+
+    </a>
+
+
+
+    <!-- ======================================
+         CHECKOUT LAYOUT
+    ======================================= -->
+
+    <section
+        id="checkoutContent"
+        class="checkout-layout">
+
+
+        <!-- ==================================
+             DELIVERY DETAILS
+        =================================== -->
+
+        <div class="checkout-left">
+
+
+            <div class="checkout-card">
+
+                <div class="card-heading">
+
+                    <span class="step-number">
+                        1
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Delivery Details
+                        </h2>
+
+                        <p>
+                            Where should we deliver
+                            your fresh products?
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <form id="checkoutForm">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="customerName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter 10 digit mobile number"
+                            maxlength="10"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group">
+
+                        <label for="address">
+                            Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            rows="3"
+                            placeholder="House number, street, village/town"
+                            required></textarea>
+
+                    </div>
+
+
+
+                    <!-- CITY + PIN -->
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                placeholder="City"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="pincode">
+                                Pincode
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                placeholder="Pincode"
+                                maxlength="6"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 PAYMENT
+            =================================== -->
+
+            <div class="checkout-card">
+
+                <div class="card-heading">
+
+                    <span class="step-number">
+                        2
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Payment Method
+                        </h2>
+
+                        <p>
+                            Choose how you want to pay
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="payment-options">
+
+
+                    <!-- COD -->
+
+                    <label class="payment-option active">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="COD"
+                            checked>
+
+                        <div class="payment-icon">
+                            💵
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Cash on Delivery
+                            </strong>
+
+                            <span>
+                                Pay when your order arrives
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+
+                    <!-- UPI -->
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="UPI">
+
+                        <div class="payment-icon">
+                            📱
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                UPI
+                            </strong>
+
+                            <span>
+                                Pay using UPI
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==================================
+                 NOTE
+            =================================== -->
+
+            <div class="farmer-note">
+
+                <div class="note-icon">
+                    👨‍🌾
+                </div>
+
+                <div>
+
+                    <h3>
+                        Direct from the Farmer
+                    </h3>
+
+                    <p>
+                        Your order is placed directly
+                        with the farmer through
+                        FarmConnect.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================
+             ORDER SUMMARY
+        =================================== -->
+
+        <aside class="order-summary">
+
+            <h2>
+                Your Order
+            </h2>
+
+
+            <div id="checkoutItems">
+
+                <!-- Products inserted here -->
+
+            </div>
+
+
+            <div class="summary-divider"></div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Items
+                </span>
+
+                <strong id="summaryItems">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong id="subtotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <strong class="free">
+                    FREE
+                </strong>
+
+            </div>
+
+
+            <div class="summary-divider"></div>
+
+
+            <div class="grand-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="grandTotal">
+                    ₹0
+                </strong>
+
+            </div>
+
+
+            <button
+                id="placeOrderBtn"
+                class="place-order-btn"
+                type="button">
+
+                🌱 Place Order
+
+            </button>
+
+
+            <p class="secure">
+
+                🔒 Your order information is securely
+                stored in Firebase.
+
+            </p>
+
+        </aside>
+
+    </section>
+
+
+
+    <!-- ======================================
+         CONNECTION BANNER
+    ======================================= -->
+
+    <section class="connection-banner">
+
+        <div class="connection-icon">
+            👨‍🌾 🤝 🛒
+        </div>
+
+        <div>
+
+            <h2>
+                From Farmer Hands to Customer Hands
+            </h2>
+
+            <p>
+                Fresh products. Direct connection.
+                Better farming relationships.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <footer>
+
+        <strong>
+            🌾 FarmConnect
+        </strong>
+
+        <span>
+            Connecting Farmer Hands 🤝 Customer Hands
+        </span>
+
+        <span>
+            © 2026 FarmConnect
+        </span>
+
+    </footer>
+
+</main>
+
+
+
+<script
+    type="module"
+    src="js/checkout.js">
+</script>
+
+
+</body>
+
+</html>
+

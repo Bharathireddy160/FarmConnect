@@ -1,18 +1,18 @@
+
 // ==========================================
-// FarmConnect Registration
+// FarmConnect - Registration
 // ==========================================
 
 import {
-    createUserWithEmailAndPassword
+    createUserWithEmailAndPassword,
+    updateProfile
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-
 
 import {
     doc,
     setDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
 
 import {
     auth,
@@ -21,7 +21,7 @@ import {
 
 
 // ==========================================
-// HTML Elements
+// GET HTML ELEMENTS
 // ==========================================
 
 const nameInput =
@@ -45,7 +45,7 @@ const confirmPasswordInput =
 const registerBtn =
     document.getElementById("registerBtn");
 
-const message =
+const registerMessage =
     document.getElementById("registerMessage");
 
 const typeButtons =
@@ -53,51 +53,70 @@ const typeButtons =
 
 
 // ==========================================
-// Default Role
+// DEFAULT USER TYPE
 // ==========================================
 
 let selectedUserType = "customer";
 
 
 // ==========================================
-// Farmer / Customer Selection
+// USER TYPE SELECTION
 // ==========================================
 
-typeButtons.forEach(button => {
+typeButtons.forEach(function (button) {
 
-    button.addEventListener("click", function () {
+    button.addEventListener(
+        "click",
+        function () {
 
-        // Remove active from all buttons
+            // Remove active from all buttons
 
-        typeButtons.forEach(btn => {
+            typeButtons.forEach(
+                function (btn) {
 
-            btn.classList.remove("active");
+                    btn.classList.remove(
+                        "active"
+                    );
 
-        });
-
-
-        // Activate selected button
-
-        this.classList.add("active");
+                }
+            );
 
 
-        // Get selected role
+            // Add active to selected button
 
-        selectedUserType =
-            this.dataset.type;
+            button.classList.add(
+                "active"
+            );
 
-    });
+
+            // Get selected type
+
+            selectedUserType =
+                button.dataset.type;
+
+
+            console.log(
+                "Selected user type:",
+                selectedUserType
+            );
+
+        }
+    );
 
 });
 
 
 // ==========================================
-// Registration
+// REGISTER
 // ==========================================
 
 registerBtn.addEventListener(
     "click",
     async function () {
+
+        // ----------------------------------
+        // GET VALUES
+        // ----------------------------------
 
         const name =
             nameInput.value.trim();
@@ -118,42 +137,90 @@ registerBtn.addEventListener(
             confirmPasswordInput.value;
 
 
-        // ======================================
-        // VALIDATION
-        // ======================================
+        // ----------------------------------
+        // CLEAR OLD MESSAGE
+        // ----------------------------------
 
-        if (
-            !name ||
-            !email ||
-            !phone ||
-            !location ||
-            !password ||
-            !confirmPassword
-        ) {
+        showMessage("", "");
+
+
+        // ----------------------------------
+        // VALIDATE NAME
+        // ----------------------------------
+
+        if (name.length < 2) {
 
             showMessage(
-                "Please fill all fields.",
+                "Please enter your full name.",
                 "error"
             );
 
+            nameInput.focus();
+
             return;
+
         }
 
 
-        // Phone validation
+        // ----------------------------------
+        // VALIDATE EMAIL
+        // ----------------------------------
 
-        if (!/^[0-9]{10}$/.test(phone)) {
+        if (!isValidEmail(email)) {
+
+            showMessage(
+                "Please enter a valid email address.",
+                "error"
+            );
+
+            emailInput.focus();
+
+            return;
+
+        }
+
+
+        // ----------------------------------
+        // VALIDATE PHONE
+        // ----------------------------------
+
+        if (
+            !/^[0-9]{10}$/.test(phone)
+        ) {
 
             showMessage(
                 "Please enter a valid 10-digit phone number.",
                 "error"
             );
 
+            phoneInput.focus();
+
             return;
+
         }
 
 
-        // Password validation
+        // ----------------------------------
+        // VALIDATE LOCATION
+        // ----------------------------------
+
+        if (location.length < 2) {
+
+            showMessage(
+                "Please enter your location.",
+                "error"
+            );
+
+            locationInput.focus();
+
+            return;
+
+        }
+
+
+        // ----------------------------------
+        // VALIDATE PASSWORD
+        // ----------------------------------
 
         if (password.length < 6) {
 
@@ -162,11 +229,16 @@ registerBtn.addEventListener(
                 "error"
             );
 
+            passwordInput.focus();
+
             return;
+
         }
 
 
-        // Password confirmation
+        // ----------------------------------
+        // CONFIRM PASSWORD
+        // ----------------------------------
 
         if (password !== confirmPassword) {
 
@@ -175,23 +247,29 @@ registerBtn.addEventListener(
                 "error"
             );
 
+            confirmPasswordInput.focus();
+
             return;
+
         }
+
+
+        // ----------------------------------
+        // DISABLE BUTTON
+        // ----------------------------------
+
+        registerBtn.disabled =
+            true;
+
+        registerBtn.textContent =
+            "Creating Account...";
 
 
         try {
 
-            // Disable button
-
-            registerBtn.disabled = true;
-
-            registerBtn.textContent =
-                "Creating Account...";
-
-
-            // ==================================
-            // CREATE FIREBASE AUTH ACCOUNT
-            // ==================================
+            // --------------------------------
+            // CREATE FIREBASE AUTH USER
+            // --------------------------------
 
             const userCredential =
                 await createUserWithEmailAndPassword(
@@ -205,27 +283,56 @@ registerBtn.addEventListener(
                 userCredential.user;
 
 
-            // ==================================
-            // CREATE FIRESTORE USER DOCUMENT
-            // ==================================
+            console.log(
+                "Firebase user created:",
+                user.uid
+            );
+
+
+            // --------------------------------
+            // SAVE NAME IN FIREBASE AUTH
+            // --------------------------------
+
+            await updateProfile(
+                user,
+                {
+                    displayName: name
+                }
+            );
+
+
+            // --------------------------------
+            // SAVE USER PROFILE IN FIRESTORE
+            // --------------------------------
 
             await setDoc(
-                doc(db, "users", user.uid),
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                ),
                 {
 
-                    uid: user.uid,
+                    uid:
+                        user.uid,
 
-                    name: name,
+                    name:
+                        name,
 
-                    email: email,
+                    fullName:
+                        name,
 
-                    phone: phone,
+                    email:
+                        email,
 
-                    location: location,
+                    phone:
+                        phone,
 
-                    role: selectedUserType,
+                    location:
+                        location,
 
-                    profileImage: "",
+                    userType:
+                        selectedUserType,
 
                     createdAt:
                         serverTimestamp()
@@ -234,103 +341,109 @@ registerBtn.addEventListener(
             );
 
 
-            // ==================================
+            // --------------------------------
             // SUCCESS
-            // ==================================
+            // --------------------------------
 
             showMessage(
-                "Account created successfully!",
+                "Account created successfully! Redirecting...",
                 "success"
             );
 
 
-            // Redirect based on role
+            // --------------------------------
+            // REDIRECT
+            // --------------------------------
 
-            setTimeout(() => {
+            setTimeout(
+                function () {
 
-                if (
-                    selectedUserType ===
-                    "farmer"
-                ) {
+                    if (
+                        selectedUserType ===
+                        "farmer"
+                    ) {
 
-                    window.location.href =
-                        "farmer-dashboard.html";
+                        window.location.href =
+                            "farmer-dashboard.html";
 
-                } else {
+                    }
 
-                    window.location.href =
-                        "customer-dashboard.html";
+                    else {
 
-                }
+                        window.location.href =
+                            "customer-dashboard.html";
 
-            }, 1500);
+                    }
 
+                },
+                1200
+            );
 
-        } catch (error) {
+        }
+
+        catch (error) {
 
             console.error(
-                "Registration Error:",
+                "Registration error:",
                 error
             );
 
 
-            let errorMessage =
-                "Registration failed. Please try again.";
+            let message =
+                "Unable to create account.";
 
+
+            // Firebase error messages
 
             if (
                 error.code ===
                 "auth/email-already-in-use"
             ) {
 
-                errorMessage =
+                message =
                     "This email is already registered.";
 
             }
-
 
             else if (
                 error.code ===
                 "auth/invalid-email"
             ) {
 
-                errorMessage =
+                message =
                     "Please enter a valid email address.";
 
             }
-
 
             else if (
                 error.code ===
                 "auth/weak-password"
             ) {
 
-                errorMessage =
-                    "Password is too weak.";
+                message =
+                    "Password is too weak. Use at least 6 characters.";
 
             }
-
 
             else if (
                 error.code ===
                 "auth/network-request-failed"
             ) {
 
-                errorMessage =
-                    "Network error. Check your internet connection.";
+                message =
+                    "Network error. Please check your internet connection.";
 
             }
 
 
             showMessage(
-                errorMessage,
+                message,
                 "error"
             );
 
 
-        } finally {
-
-            registerBtn.disabled = false;
+            registerBtn.disabled =
+                false;
 
             registerBtn.textContent =
                 "Create Account";
@@ -342,24 +455,49 @@ registerBtn.addEventListener(
 
 
 // ==========================================
-// Display Message
+// SHOW MESSAGE
 // ==========================================
 
-function showMessage(text, type) {
+function showMessage(
+    text,
+    type
+) {
 
-    message.textContent = text;
+    if (!registerMessage) {
+
+        return;
+
+    }
 
 
-    if (type === "success") {
+    registerMessage.textContent =
+        text;
 
-        message.style.color =
-            "#2e8b3c";
 
-    } else {
+    registerMessage.className =
+        "message";
 
-        message.style.color =
-            "#d43d3d";
+
+    if (type) {
+
+        registerMessage.classList.add(
+            type
+        );
 
     }
 
 }
+
+
+// ==========================================
+// EMAIL VALIDATION
+// ==========================================
+
+function isValidEmail(email) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        email
+    );
+
+}
+
