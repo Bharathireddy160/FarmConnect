@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Orders | FarmConnect</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/farmer-orders.css">
+
+</head>
+
+<body>
+
+<header class="page-header">
+
+    <div>
+        <h1>📦 Customer Orders</h1>
+
+        <p>
+            View and manage orders received from customers.
+        </p>
+    </div>
+
+    <div class="header-actions">
+
+        <a href="farmer-dashboard.html">
+            🏠 Dashboard
+        </a>
+
+        <a href="my-products.html">
+            🌾 My Products
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <!-- ORDER STATISTICS -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <span>📦</span>
+
+            <div>
+                <h2 id="totalOrders">0</h2>
+                <p>Total Orders</p>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <span>⏳</span>
+
+            <div>
+                <h2 id="pendingOrders">0</h2>
+                <p>Pending</p>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <span>🚚</span>
+
+            <div>
+                <h2 id="shippedOrders">0</h2>
+                <p>Out for Delivery</p>
+            </div>
+        </div>
+
+
+        <div class="stat-card">
+            <span>💰</span>
+
+            <div>
+                <h2 id="totalRevenue">₹0</h2>
+                <p>Revenue</p>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- FILTER -->
+
+    <section class="filter-section">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search customer or product..."
+        >
+
+        <select id="statusFilter">
+
+            <option value="all">
+                All Orders
+            </option>
+
+            <option value="Pending">
+                Pending
+            </option>
+
+            <option value="Accepted">
+                Accepted
+            </option>
+
+            <option value="Packed">
+                Packed
+            </option>
+
+            <option value="Out for Delivery">
+                Out for Delivery
+            </option>
+
+            <option value="Delivered">
+                Delivered
+            </option>
+
+            <option value="Rejected">
+                Rejected
+            </option>
+
+        </select>
+
+    </section>
+
+
+    <!-- ORDERS -->
+
+    <section>
+
+        <div id="ordersContainer">
+
+            <p class="loading">
+                Loading orders...
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script
+    type="module"
+    src="js/farmer-orders.js">
+</script>
+
+</body>
+</html>

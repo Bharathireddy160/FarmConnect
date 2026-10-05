@@ -2,613 +2,196 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Farmer Dashboard | FarmConnect</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
 
-    <link rel="stylesheet" href="css/dashboard.css">
-
+    <link rel="stylesheet" href="css/farmer.css">
 </head>
-
 
 <body>
 
+<div class="dashboard">
 
-    <!-- ==========================================
-         SIDEBAR
-    =========================================== -->
-
+    <!-- SIDEBAR -->
     <aside class="sidebar">
 
-        <div class="brand">
+        <div class="logo">
+            🌾 <span>FarmConnect</span>
+        </div>
 
-            <div class="brand-icon">
-                🌾
+        <div class="farmer-mini-profile">
+            <div id="farmerInitial" class="profile-circle">
+                F
             </div>
 
             <div>
-
-                <h2>FarmConnect</h2>
-
-                <span>
-                    Farmer 🤝 Customer
-                </span>
-
+                <h3 id="sidebarFarmerName">Farmer</h3>
+                <p>Farmer Account</p>
             </div>
-
         </div>
 
+        <nav>
 
-        <nav class="sidebar-nav">
-
-            <a href="farmer-dashboard.html"
-               class="nav-item active">
-
-                <span>📊</span>
-
-                Dashboard
-
+            <a href="farmer-dashboard.html" class="active">
+                🏠 Dashboard
             </a>
 
-
-            <a href="add-product.html"
-               class="nav-item">
-
-                <span>➕</span>
-
-                Add Product
-
+            <a href="add-product.html">
+                ➕ Add Product
             </a>
 
-
-            <a href="my-products.html"
-               class="nav-item">
-
-                <span>🌾</span>
-
-                My Products
-
+            <a href="my-products.html">
+                🌾 My Products
             </a>
 
-
-            <a href="farmer-orders.html"
-               class="nav-item">
-
-                <span>📦</span>
-
-                Orders
-
+            <a href="farmer-orders.html">
+                📦 Orders
             </a>
 
-
-            <a href="profile.html"
-               class="nav-item">
-
-                <span>👤</span>
-
-                My Profile
-
+            <a href="farmer-profile.html">
+                👤 Profile
             </a>
 
         </nav>
 
-
-        <div class="sidebar-bottom">
-
-            <div class="connection-mini">
-
-                👨‍🌾
-
-                <span>🤝</span>
-
-                🛒
-
-            </div>
-
-            <p>
-                Connecting farms with families
-            </p>
-
-
-            <button id="logoutBtn"
-                    class="logout-btn">
-
-                🚪 Logout
-
-            </button>
-
-        </div>
+        <button id="logoutBtn" class="logout-btn">
+            🚪 Logout
+        </button>
 
     </aside>
 
 
-
-    <!-- ==========================================
-         MAIN CONTENT
-    =========================================== -->
-
+    <!-- MAIN CONTENT -->
     <main class="main-content">
-
-
-        <!-- TOP BAR -->
 
         <header class="topbar">
 
             <div>
-
-                <p class="welcome-small">
-                    FARMER DASHBOARD
-                </p>
-
-                <h1>
-                    Welcome,
-                    <span id="farmerName">
-                        Farmer
-                    </span> 👋
-                </h1>
-
+                <h1>Farmer Dashboard 🌾</h1>
+                <p id="welcomeText">Welcome back!</p>
             </div>
 
-
-            <div class="top-profile">
-
-                <div class="profile-avatar"
-                     id="profileAvatar">
-
-                    👨‍🌾
-
-                </div>
-
-                <div>
-
-                    <strong id="topFarmerName">
-                        Farmer
-                    </strong>
-
-                    <small>
-                        Farmer Account
-                    </small>
-
-                </div>
-
+            <div id="topInitial" class="profile-circle">
+                F
             </div>
 
         </header>
 
 
+        <!-- STATISTICS -->
 
-        <!-- ==========================================
-             HERO CONNECTION
-        =========================================== -->
+        <section class="stats">
 
-        <section class="dashboard-hero">
+            <div class="stat-card">
+                <div class="stat-icon">🌾</div>
 
-            <div class="hero-text">
-
-                <span>
-                    🌱 FARMER TO CUSTOMER
-                </span>
-
-                <h2>
-                    Your Farm.
-                    <br>
-                    Your Products.
-                    <br>
-                    Your Customers.
-                </h2>
-
-                <p>
-                    Sell your fresh agricultural products
-                    directly to customers through FarmConnect.
-                </p>
-
-
-                <a href="add-product.html"
-                   class="hero-btn">
-
-                    ➕ Add Your First Product
-
-                </a>
-
+                <div>
+                    <h3 id="productCount">0</h3>
+                    <p>My Products</p>
+                </div>
             </div>
 
 
-            <div class="farmer-connection">
+            <div class="stat-card">
+                <div class="stat-icon">📦</div>
 
-                <div class="connection-person">
-
-                    <div class="big-icon">
-                        👨‍🌾
-                    </div>
-
-                    <strong>
-                        You
-                    </strong>
-
-                    <small>
-                        Farmer
-                    </small>
-
+                <div>
+                    <h3 id="orderCount">0</h3>
+                    <p>Total Orders</p>
                 </div>
+            </div>
 
 
-                <div class="connection-arrow">
+            <div class="stat-card">
+                <div class="stat-icon">⏳</div>
 
+                <div>
+                    <h3 id="pendingCount">0</h3>
+                    <p>Pending Orders</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+
+                <div>
+                    <h3 id="revenue">₹0</h3>
+                    <p>Total Revenue</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="section">
+
+            <h2>Quick Actions</h2>
+
+            <div class="quick-actions">
+
+                <a href="add-product.html" class="action-card">
+                    <span>➕</span>
+                    <h3>Add Product</h3>
+                    <p>Add a new agricultural product.</p>
+                </a>
+
+                <a href="my-products.html" class="action-card">
                     <span>🌾</span>
-
-                    <div></div>
-
-                    <span>🤝</span>
-
-                    <div></div>
-
-                    <span>🛒</span>
-
-                </div>
-
-
-                <div class="connection-person">
-
-                    <div class="big-icon">
-                        🛒
-                    </div>
-
-                    <strong>
-                        Customers
-                    </strong>
-
-                    <small>
-                        Your Buyers
-                    </small>
-
-                </div>
+                    <h3>My Products</h3>
+                    <p>Manage your products.</p>
+                </a>
+                <a href="farmer-orders.html" class="action-card">
+                    <span>📦</span>
+                    <h3>Orders</h3>
+                    <p>View and manage customer orders.</p>
+                </a>
 
             </div>
 
         </section>
 
 
+        <!-- RECENT PRODUCTS -->
 
-        <!-- ==========================================
-             STATISTICS
-        =========================================== -->
+        <section class="section">
 
-        <section class="stats-grid">
+            <div class="section-header">
 
-
-            <div class="stat-card">
-
-                <div class="stat-icon green">
-                    🌾
-                </div>
-
-                <div>
-
-                    <span>
-                        My Products
-                    </span>
-
-                    <h2 id="productCount">
-                        0
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon orange">
-                    📦
-                </div>
-
-                <div>
-
-                    <span>
-                        Total Orders
-                    </span>
-
-                    <h2 id="orderCount">
-                        0
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon blue">
-                    💰
-                </div>
-
-                <div>
-
-                    <span>
-                        Total Sales
-                    </span>
-
-                    <h2 id="salesAmount">
-                        ₹0
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon purple">
-                    👥
-                </div>
-
-                <div>
-
-                    <span>
-                        Customers
-                    </span>
-
-                    <h2 id="customerCount">
-                        0
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ==========================================
-             QUICK ACTIONS
-        =========================================== -->
-
-        <section class="dashboard-section">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span>
-                        QUICK ACTIONS
-                    </span>
-
-                    <h2>
-                        Manage Your Farm Store
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-            <div class="quick-grid">
-
-
-                <a href="add-product.html"
-                   class="quick-card">
-
-                    <div class="quick-icon">
-                        ➕
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            Add Product
-                        </h3>
-
-                        <p>
-                            List vegetables, fruits,
-                            grains and other products.
-                        </p>
-
-                    </div>
-
-                    <span class="arrow">
-                        →
-                    </span>
-
-                </a>
-
-
-
-                <a href="my-products.html"
-                   class="quick-card">
-
-                    <div class="quick-icon">
-                        🌾
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            My Products
-                        </h3>
-
-                        <p>
-                            View and manage your
-                            listed farm products.
-                        </p>
-
-                    </div>
-
-                    <span class="arrow">
-                        →
-                    </span>
-
-                </a>
-
-
-
-                <a href="farmer-orders.html"
-                   class="quick-card">
-
-                    <div class="quick-icon">
-                        📦
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            Manage Orders
-                        </h3>
-
-                        <p>
-                            View customer orders and
-                            update their status.
-                        </p>
-
-                    </div>
-
-                    <span class="arrow">
-                        →
-                    </span>
-
-                </a>
-
-
-
-                <a href="profile.html"
-                   class="quick-card">
-
-                    <div class="quick-icon">
-                        👤
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            My Profile
-                        </h3>
-
-                        <p>
-                            Manage your farmer
-                            account information.
-                        </p>
-
-                    </div>
-
-                    <span class="arrow">
-                        →
-                    </span>
-
-                </a>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ==========================================
-             RECENT PRODUCTS
-        =========================================== -->
-
-        <section class="dashboard-section">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span>
-                        FARM STORE
-                    </span>
-
-                    <h2>
-                        Recent Products
-                    </h2>
-
-                </div>
-
+                <h2>My Recent Products</h2>
 
                 <a href="my-products.html">
-                    View All →
+                    View All
                 </a>
 
             </div>
 
+            <div id="recentProducts" class="product-grid">
 
-            <div id="recentProducts"
-                 class="recent-products">
-
-                <div class="empty-state">
-
-                    <div>
-                        🌱
-                    </div>
-
-                    <h3>
-                        No products yet
-                    </h3>
-
-                    <p>
-                        Start by adding your first
-                        farm product.
-                    </p>
-
-                    <a href="add-product.html">
-                        Add Product
-                    </a>
-
-                </div>
+                <p class="loading">
+                    Loading products...
+                </p>
 
             </div>
 
         </section>
-
-
-
-        <!-- ==========================================
-             FOOTER
-        =========================================== -->
-
-        <footer>
-
-            <strong>
-                🌾 FarmConnect
-            </strong>
-
-            <span>
-                Connecting Farmer Hands 🤝 Customer Hands
-            </span>
-
-            <span>
-                © 2026 FarmConnect
-            </span>
-
-        </footer>
-
 
     </main>
 
+</div>
 
 
-    <!-- JavaScript -->
-
-    <script
-        type="module"
-        src="js/farmer-dashboard.js">
-    </script>
-
+<script type="module" src="js/farmer-dashboard.js"></script>
 
 </body>
-
 </html>

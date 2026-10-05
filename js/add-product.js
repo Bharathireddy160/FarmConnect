@@ -1,48 +1,21 @@
-// ==========================================
-// FarmConnect - Add Product
-// ==========================================
-
 import {
-    onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-
-
-import {
-    doc,
-    getDoc,
-    addDoc,
     collection,
+    addDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-
-import {
-    ref,
-    uploadBytes,
-    getDownloadURL
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-storage.js";
-
-
 import {
     auth,
-    db,
-    storage
+    db
 } from "./firebase.js";
 
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-// ==========================================
-// HTML ELEMENTS
-// ==========================================
 
-const productForm =
+const form =
     document.getElementById("productForm");
-
-const productImage =
-    document.getElementById("productImage");
-
-const imagePreview =
-    document.getElementById("imagePreview");
 
 const productName =
     document.getElementById("productName");
@@ -56,216 +29,73 @@ const price =
 const quantity =
     document.getElementById("quantity");
 
-const unit =
-    document.getElementById("unit");
-
-const productLocation =
-    document.getElementById("productLocation");
+const locationInput =
+    document.getElementById("location");
 
 const description =
     document.getElementById("description");
 
-const saveProductBtn =
-    document.getElementById("saveProductBtn");
+const productImage =
+    document.getElementById("productImage");
 
-const productMessage =
-    document.getElementById("productMessage");
+const addProductBtn =
+    document.getElementById("addProductBtn");
 
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-
-// ==========================================
-// FARMER DATA
-// ==========================================
-
-let currentFarmer = null;
+const message =
+    document.getElementById("message");
 
 
-// ==========================================
-// CHECK AUTHENTICATION
-// ==========================================
-
-onAuthStateChanged(
-    auth,
-    async (user) => {
-
-        if (!user) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-        }
+let currentUser = null;
 
 
-        try {
+/* CHECK LOGIN */
 
-            const userRef =
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                );
+onAuthStateChanged(auth, (user) => {
 
+    if (!user) {
 
-            const userSnapshot =
-                await getDoc(userRef);
+        window.location.href =
+            "login.html";
 
-
-            if (!userSnapshot.exists()) {
-
-                showMessage(
-                    "Farmer profile not found.",
-                    "error"
-                );
-
-                return;
-            }
-
-
-            const userData =
-                userSnapshot.data();
-
-
-            // Check farmer role
-
-            if (
-                userData.role !==
-                "farmer"
-            ) {
-
-                window.location.href =
-                    "customer-dashboard.html";
-
-                return;
-            }
-
-
-            currentFarmer = {
-
-                uid: user.uid,
-
-                name:
-                    userData.name || "Farmer",
-
-                location:
-                    userData.location || ""
-
-            };
-
-
-            // Automatically fill location
-
-            if (currentFarmer.location) {
-
-                productLocation.value =
-                    currentFarmer.location;
-
-            }
-
-
-        } catch (error) {
-
-            console.error(
-                "Authentication error:",
-                error
-            );
-
-        }
-
+        return;
     }
-);
 
+    const type =
+        localStorage.getItem(
+            "farmConnectUserType"
+        );
 
-// ==========================================
-// IMAGE PREVIEW
-// ==========================================
+    if (type !== "farmer") {
 
-productImage.addEventListener(
-    "change",
-    function () {
+        window.location.href =
+            "customer-dashboard.html";
 
-        const file =
-            this.files[0];
-
-
-        if (!file) {
-
-            return;
-        }
-
-
-        // Check file size
-
-        if (
-            file.size >
-            5 * 1024 * 1024
-        ) {
-
-            showMessage(
-                "Image must be less than 5 MB.",
-                "error"
-            );
-
-            this.value = "";
-
-            imagePreview.style.display =
-                "none";
-
-            return;
-        }
-
-
-        // Show preview
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function (event) {
-
-                imagePreview.src =
-                    event.target.result;
-
-                imagePreview.style.display =
-                    "block";
-
-            };
-
-
-        reader.readAsDataURL(file);
-
+        return;
     }
-);
+
+    currentUser = user;
+
+});
 
 
-// ==========================================
-// SAVE PRODUCT
-// ==========================================
+/* ADD PRODUCT */
 
-productForm.addEventListener(
+form.addEventListener(
     "submit",
-    async function (event) {
+    async (event) => {
 
         event.preventDefault();
 
-
-        // Check farmer
-
-        if (!currentFarmer) {
+        if (!currentUser) {
 
             showMessage(
-                "Please login as a farmer.",
+                "Please login again.",
                 "error"
             );
 
             return;
         }
 
-
-        // Get values
 
         const name =
             productName.value.trim();
@@ -279,24 +109,22 @@ productForm.addEventListener(
         const productQuantity =
             Number(quantity.value);
 
-        const selectedUnit =
-            unit.value;
-
-        const location =
-            productLocation.value.trim();
+        const farmLocation =
+            locationInput.value.trim();
 
         const productDescription =
             description.value.trim();
 
 
-        // ======================================
-        // VALIDATION
-        // ======================================
-
-        if (!name) {
+        if (!name ||
+            !selectedCategory ||
+            productPrice <= 0 ||
+            productQuantity <= 0 ||
+            !farmLocation ||
+            !productDescription) {
 
             showMessage(
-                "Please enter product name.",
+                "Please fill all fields correctly.",
                 "error"
             );
 
@@ -304,286 +132,109 @@ productForm.addEventListener(
         }
 
 
-        if (!selectedCategory) {
+        addProductBtn.disabled = true;
 
-            showMessage(
-                "Please select a category.",
-                "error"
-            );
+        addProductBtn.textContent =
+            "Adding Product...";
 
-            return;
-        }
-
-
-        if (
-            !productPrice ||
-            productPrice <= 0
-        ) {
-
-            showMessage(
-                "Please enter a valid price.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        if (
-            !productQuantity ||
-            productQuantity <= 0
-        ) {
-
-            showMessage(
-                "Please enter a valid quantity.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        if (!location) {
-
-            showMessage(
-                "Please enter product location.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        // ======================================
-        // START SAVING
-        // ======================================
 
         try {
 
-            saveProductBtn.disabled =
-                true;
-
-            saveProductBtn.textContent =
-                "Publishing...";
-
-
-            let imageURL = "";
+            const farmerName =
+                localStorage.getItem(
+                    "farmConnectUserName"
+                ) ||
+                currentUser.email
+                    .split("@")[0];
 
 
-            // ==================================
-            // UPLOAD IMAGE
-            // ==================================
+            /*
+             * For now we use a placeholder image.
+             *
+             * Firebase Storage image upload
+             * will be added in the next improvement.
+             */
 
-            const imageFile =
-                productImage.files[0];
-
-
-            if (imageFile) {
-
-                const imageName =
-                    Date.now() +
-                    "_" +
-                    imageFile.name
-                        .replace(/\s+/g, "_");
-
-
-                const imageRef =
-                    ref(
-                        storage,
-                        `products/${currentFarmer.uid}/${imageName}`
-                    );
-
-
-                await uploadBytes(
-                    imageRef,
-                    imageFile
-                );
-
-
-                imageURL =
-                    await getDownloadURL(
-                        imageRef
-                    );
-
-            }
-
-
-            // ==================================
-            // SAVE TO FIRESTORE
-            // ==================================
-
-            const productData = {
-
-                farmerId:
-                    currentFarmer.uid,
-
-                farmerName:
-                    currentFarmer.name,
-
-                name: name,
-
-                category:
-                    selectedCategory,
-
-                price:
-                    productPrice,
-
-                quantity:
-                    productQuantity,
-
-                unit:
-                    selectedUnit,
-
-                location:
-                    location,
-
-                description:
-                    productDescription,
-
-                image:
-                    imageURL,
-
-                available:
-                    true,
-
-                createdAt:
-                    serverTimestamp(),
-
-                updatedAt:
-                    serverTimestamp()
-
-            };
+            const imageUrl =
+                "images/default-product.jpg";
 
 
             await addDoc(
-                collection(
-                    db,
-                    "products"
-                ),
-                productData
+                collection(db, "products"),
+                {
+
+                    name: name,
+
+                    category:
+                        selectedCategory,
+
+                    price:
+                        productPrice,
+
+                    quantity:
+                        productQuantity,
+
+                    location:
+                        farmLocation,
+
+                    description:
+                        productDescription,
+
+                    imageUrl:
+                        imageUrl,
+
+                    farmerId:
+                        currentUser.uid,
+
+                    farmerName:
+                        farmerName,
+
+                    createdAt:
+                        serverTimestamp(),
+
+                    updatedAt:
+                        serverTimestamp()
+
+                }
             );
 
 
-            // ==================================
-            // SUCCESS
-            // ==================================
-
             showMessage(
-                "🌾 Product published successfully!",
+                "Product added successfully! 🌾",
                 "success"
             );
 
 
-            // Reset form
-
-            productForm.reset();
-
-            imagePreview.src = "";
-
-            imagePreview.style.display =
-                "none";
+            form.reset();
 
 
-            // Restore farmer location
+            setTimeout(() => {
 
-            if (
-                currentFarmer.location
-            ) {
+                window.location.href =
+                    "my-products.html";
 
-                productLocation.value =
-                    currentFarmer.location;
-
-            }
-
-
-            // Redirect
-
-            setTimeout(
-                () => {
-
-                    window.location.href =
-                        "my-products.html";
-
-                },
-                1500
-            );
+            }, 1200);
 
 
         } catch (error) {
 
             console.error(
-                "Product upload error:",
+                "Add product error:",
                 error
             );
 
-
-            let errorMessage =
-                "Could not publish product.";
-
-
-            if (
-                error.code ===
-                "storage/unauthorized"
-            ) {
-
-                errorMessage =
-                    "Storage permission denied. Check Firebase Storage rules.";
-
-            }
-
-
-            if (
-                error.code ===
-                "permission-denied"
-            ) {
-
-                errorMessage =
-                    "Firestore permission denied. Check Firestore rules.";
-
-            }
-
-
             showMessage(
-                errorMessage,
+                error.message ||
+                "Unable to add product.",
                 "error"
             );
 
-
         } finally {
 
-            saveProductBtn.disabled =
-                false;
+            addProductBtn.disabled = false;
 
-            saveProductBtn.textContent =
-                "🌾 Publish Product";
-
-        }
-
-    }
-);
-
-
-// ==========================================
-// LOGOUT
-// ==========================================
-
-logoutBtn.addEventListener(
-    "click",
-    async () => {
-
-        try {
-
-            await signOut(auth);
-
-            window.location.href =
-                "login.html";
-
-        } catch (error) {
-
-            console.error(
-                "Logout error:",
-                error
-            );
+            addProductBtn.textContent =
+                "Add Product";
 
         }
 
@@ -591,29 +242,9 @@ logoutBtn.addEventListener(
 );
 
 
-// ==========================================
-// MESSAGE
-// ==========================================
+function showMessage(text, type) {
 
-function showMessage(
-    text,
-    type
-) {
+    message.textContent = text;
 
-    productMessage.textContent =
-        text;
-
-
-    if (type === "success") {
-
-        productMessage.style.color =
-            "#2e8b3c";
-
-    } else {
-
-        productMessage.style.color =
-            "#d33d3d";
-
-    }
-
+    message.className = type;
 }

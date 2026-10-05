@@ -1,6 +1,14 @@
-// ==========================================
-// FarmConnect - Farmer Dashboard
-// ==========================================
+import {
+    collection,
+    query,
+    where,
+    getDocs
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+import {
+    auth,
+    db
+} from "./firebase.js";
 
 import {
     onAuthStateChanged,
@@ -8,171 +16,151 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 
-import {
-    doc,
-    getDoc,
-    collection,
-    query,
-    where,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+const farmerName = document.getElementById("sidebarFarmerName");
+const farmerInitial = document.getElementById("farmerInitial");
+const topInitial = document.getElementById("topInitial");
+const welcomeText = document.getElementById("welcomeText");
 
+const productCount = document.getElementById("productCount");
+const orderCount = document.getElementById("orderCount");
+const pendingCount = document.getElementById("pendingCount");
+const revenue = document.getElementById("revenue");
 
-import {
-    auth,
-    db
-} from "./firebase.js";
-
-
-// ==========================================
-// HTML Elements
-// ==========================================
-
-const farmerName =
-    document.getElementById("farmerName");
-
-const topFarmerName =
-    document.getElementById("topFarmerName");
-
-const productCount =
-    document.getElementById("productCount");
-
-const orderCount =
-    document.getElementById("orderCount");
-
-const salesAmount =
-    document.getElementById("salesAmount");
-
-const customerCount =
-    document.getElementById("customerCount");
+const recentProducts =
+    document.getElementById("recentProducts");
 
 const logoutBtn =
     document.getElementById("logoutBtn");
 
 
-// ==========================================
-// CHECK LOGIN
-// ==========================================
+/* CHECK LOGIN */
 
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
 
-        window.location.href =
-            "login.html";
+        window.location.href = "login.html";
 
         return;
     }
 
+    const savedType =
+        localStorage.getItem("farmConnectUserType");
 
-    try {
+    if (savedType !== "farmer") {
 
-        // Get user document
+        window.location.href =
+            "customer-dashboard.html";
 
-        const userRef =
-            doc(db, "users", user.uid);
-
-        const userSnapshot =
-            await getDoc(userRef);
-
-
-        if (!userSnapshot.exists()) {
-
-            console.error(
-                "Farmer profile not found."
-            );
-
-            return;
-        }
-
-
-        const userData =
-            userSnapshot.data();
-
-
-        // ==================================
-        // CHECK ROLE
-        // ==================================
-
-        if (userData.role !== "farmer") {
-
-            window.location.href =
-                "customer-dashboard.html";
-
-            return;
-        }
-
-
-        // ==================================
-        // DISPLAY FARMER INFORMATION
-        // ==================================
-
-        farmerName.textContent =
-            userData.name || "Farmer";
-
-
-        topFarmerName.textContent =
-            userData.name || "Farmer";
-
-
-        // ==================================
-        // LOAD PRODUCTS
-        // ==================================
-
-        await loadFarmerProducts(user.uid);
-
-
-        // ==================================
-        // LOAD ORDERS
-        // ==================================
-
-        await loadFarmerOrders(user.uid);
-
-
-    } catch (error) {
-
-        console.error(
-            "Dashboard error:",
-            error
-        );
-
+        return;
     }
+
+    const name =
+        localStorage.getItem("farmConnectUserName") ||
+        user.displayName ||
+        user.email.split("@")[0];
+
+    displayFarmer(name);
+
+    await loadProducts(user.uid);
+
+    await loadOrders(user.uid);
 
 });
 
 
-// ==========================================
-// LOAD FARMER PRODUCTS
-// ==========================================
+/* DISPLAY FARMER */
 
-async function loadFarmerProducts(
-    farmerId
-) {
+function displayFarmer(name) {
+
+    farmerName.textContent = name;
+
+    welcomeText.textContent =
+        `Welcome back, ${name}!`;
+
+    const initial =
+        name.charAt(0).toUpperCase();
+
+    farmerInitial.textContent = initial;
+
+    topInitial.textContent = initial;
+}
+
+
+/* LOAD PRODUCTS */
+
+async function loadProducts(uid) {
 
     try {
 
         const productsRef =
             collection(db, "products");
 
-
         const q =
             query(
                 productsRef,
-                where(
-                    "farmerId",
-                    "==",
-                    farmerId
-                )
+                where("farmerId", "==", uid)
             );
-
 
         const snapshot =
             await getDocs(q);
 
-
         productCount.textContent =
             snapshot.size;
 
+        recentProducts.innerHTML = "";
+
+        if (snapshot.empty) {
+
+            recentProducts.innerHTML =
+                `<p class="loading">
+                    You have not added any products yet.
+                </p>`;
+
+            return;
+        }
+
+        let count = 0;
+
+        snapshot.forEach((docSnap) => {
+
+            if (count >= 3) return;
+
+            const product =
+                docSnap.data();
+
+            const image =
+                product.imageUrl ||
+                "images/default-product.jpg";
+
+            const card = document.createElement("div");
+
+            card.className =
+                "product-card";
+
+            card.innerHTML = `
+                <img src="${image}" alt="${product.name}">
+
+                <div class="product-info">
+
+                    <h3>${product.name}</h3>
+
+                    <p>
+                        ${product.category || "Agricultural Product"}
+                    </p>
+
+                    <p class="product-price">
+                        ₹${product.price} / kg
+                    </p>
+
+                </div>
+            `;
+
+            recentProducts.appendChild(card);
+
+            count++;
+
+        });
 
     } catch (error) {
 
@@ -181,99 +169,75 @@ async function loadFarmerProducts(
             error
         );
 
+        recentProducts.innerHTML =
+            `<p class="loading">
+                Unable to load products.
+            </p>`;
     }
-
 }
 
 
-// ==========================================
-// LOAD FARMER ORDERS
-// ==========================================
+/* LOAD ORDERS */
 
-async function loadFarmerOrders(
-    farmerId
-) {
+async function loadOrders(uid) {
 
     try {
 
         const ordersRef =
             collection(db, "orders");
 
-
         const q =
             query(
                 ordersRef,
-                where(
-                    "farmerId",
-                    "==",
-                    farmerId
-                )
+                where("farmerId", "==", uid)
             );
-
 
         const snapshot =
             await getDocs(q);
 
-
         orderCount.textContent =
             snapshot.size;
 
+        let pending = 0;
+        let totalRevenue = 0;
 
-        let totalSales = 0;
-
-        const customers =
-            new Set();
-
-
-        snapshot.forEach((document) => {
+        snapshot.forEach((docSnap) => {
 
             const order =
-                document.data();
+                docSnap.data();
 
+            if (order.status === "Pending") {
 
-            if (order.totalAmount) {
-
-                totalSales +=
-                    Number(order.totalAmount);
+                pending++;
 
             }
 
+            if (order.status === "Delivered") {
 
-            if (order.customerId) {
-
-                customers.add(
-                    order.customerId
-                );
-
+                totalRevenue +=
+                    Number(order.total || 0);
             }
 
         });
 
+        pendingCount.textContent =
+            pending;
 
-        salesAmount.textContent =
-            "₹" +
-            totalSales.toLocaleString("en-IN");
-
-
-        customerCount.textContent =
-            customers.size;
-
+        revenue.textContent =
+            `₹${totalRevenue}`;
 
     } catch (error) {
 
-        console.error(
-            "Order loading error:",
+        console.log(
+            "Orders not available yet:",
             error
         );
 
     }
-
 }
 
 
-// ==========================================
-// LOGOUT
-// ==========================================
+/* LOGOUT */
 
 logoutBtn.addEventListener(
     "click",
@@ -282,6 +246,26 @@ logoutBtn.addEventListener(
         try {
 
             await signOut(auth);
+
+            localStorage.removeItem(
+                "farmConnectLoggedIn"
+            );
+
+            localStorage.removeItem(
+                "farmConnectUserId"
+            );
+
+            localStorage.removeItem(
+                "farmConnectUserEmail"
+            );
+
+            localStorage.removeItem(
+                "farmConnectUserName"
+            );
+
+            localStorage.removeItem(
+                "farmConnectUserType"
+            );
 
             window.location.href =
                 "login.html";
@@ -292,8 +276,6 @@ logoutBtn.addEventListener(
                 "Logout error:",
                 error
             );
-
         }
-
     }
 );

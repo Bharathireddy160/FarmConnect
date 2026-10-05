@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Profile | FarmConnect</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/farmer-profile.css">
+
+</head>
+
+<body>
+
+<div class="profile-page">
+
+    <!-- HEADER -->
+
+    <header class="profile-header">
+
+        <div>
+            <h1>🌾 Farmer Profile</h1>
+
+            <p>
+                Manage your FarmConnect profile
+            </p>
+        </div>
+
+        <div class="header-links">
+
+            <a href="farmer-dashboard.html">
+                🏠 Dashboard
+            </a>
+
+            <a href="farmer-orders.html">
+                📦 Orders
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- PROFILE -->
+
+    <main class="profile-container">
+
+        <div class="profile-card">
+
+            <!-- PROFILE TOP -->
+
+            <div class="profile-top">
+
+                <div
+                    id="profileInitial"
+                    class="profile-avatar">
+                    F
+                </div>
+
+                <div>
+
+                    <h2 id="displayName">
+                        Farmer
+                    </h2>
+
+                    <p id="displayEmail">
+                        Loading...
+                    </p>
+
+                    <span class="farmer-badge">
+                        👨‍🌾 Farmer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="profileForm">
+
+                <div class="form-grid">
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            readonly
+                        >
+
+                        <small>
+                            Email cannot be changed here.
+                        </small>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter phone number"
+                            maxlength="10"
+                        >
+
+                    </div>
+
+
+                    <!-- FARM NAME -->
+
+                    <div class="form-group">
+
+                        <label for="farmName">
+                            Farm Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="farmName"
+                            placeholder="Example: Green Valley Farm"
+                        >
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group">
+
+                        <label for="location">
+                            Farm Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="Example: Vijayawada"
+                        >
+
+                    </div>
+
+
+                    <!-- CITY -->
+
+                    <div class="form-group">
+
+                        <label for="city">
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            placeholder="Enter city"
+                        >
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group full-width">
+
+                        <label for="address">
+                            Complete Address
+                        </label>
+
+                        <textarea
+                            id="address"
+                            rows="4"
+                            placeholder="Enter your complete farm address"
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- ABOUT -->
+
+                    <div class="form-group full-width">
+
+                        <label for="about">
+                            About You
+                        </label>
+
+                        <textarea
+                            id="about"
+                            rows="4"
+                            placeholder="Tell customers about your farm and products..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="saveBtn">
+
+                    Save Changes
+
+                </button>
+
+                <p
+                    id="message"
+                    class="message"
+                    aria-live="polite">
+                </p>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script
+    type="module"
+    src="js/farmer-profile.js">
+</script>
+
+</body>
+</html>
